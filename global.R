@@ -1,3 +1,6 @@
 library("shiny")
 library("survival")
+library("flexsurv")
 library("plotly")
+source("surv.R")
+t <- seq(0, 100, .01)
