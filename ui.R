@@ -36,9 +36,9 @@ pars.llogis <- conditionalPanel(
 
 pars.gengamma <- conditionalPanel(
   condition = "input.survdist == 'gengamma'",
-  numericInput("gengamma.mu", label = "Location", value = 0, step = .1),
+  numericInput("gengamma.mu", label = "Location", value = 2, step = .1),
   numericInput("gengamma.sigma", label = "Scale", value = 1, step = .1),
-  numericInput("gengamma.Q", label = "Shape", value = 1, step = .1)
+  numericInput("gengamma.Q", label = "Shape", value = 0, step = .1)
 )
 
 # SURVIVAL CURVES --------------------------------------------------------------
