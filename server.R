@@ -80,4 +80,6 @@ server <- function(input, output, session) {
       config(displayModeBar = FALSE) %>%
       layout(xaxis = x.axis, yaxis = y.axis)
   })
+  
 }
+

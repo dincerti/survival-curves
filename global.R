@@ -1,3 +1,4 @@
+require("markdown")
 library("shiny")
 library("survival")
 library("flexsurv")

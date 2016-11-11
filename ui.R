@@ -1,41 +1,41 @@
 # SELECT PARAMETERS ------------------------------------------------------------
 pars.exp <- conditionalPanel(
-  condition = "input.survdist.indexOf('exp') != -1",
+  condition = "input.survdist == 'exp'",
   numericInput("rate", label = "Rate", value = 1, step = .1)
 )
 
 pars.wei <- conditionalPanel(
-  condition = "input.survdist.indexOf('wei') != -1",
+  condition = "input.survdist == 'wei'",
   numericInput("shape", label = "Shape", value = 1, step = .1),
   numericInput("scale", label = "Scale", value = 1, step = .1)
 )
 
 pars.gamma <- conditionalPanel(
-  condition = "input.survdist.indexOf('gamma') != -1",
+  condition = "input.survdist == 'gamma'",
   numericInput("gamma.shape", label = "Shape", value = 2, step = .1),
   numericInput("gamma.rate", label = "Rate", value = 1, step = .1)
 )
 
 pars.lnorm <- conditionalPanel(
-  condition = "input.survdist.indexOf('lnorm') != -1",
+  condition = "input.survdist == 'lnorm'",
   numericInput("logmean", label = "Mean (log scale)", value = 2, step = .1),
   numericInput("logsd", label = "Standard deviation (log scale)", value = 1, step = .1)
 )
 
 pars.gompertz <- conditionalPanel(
-  condition = "input.survdist.indexOf('gompertz') != -1",
+  condition = "input.survdist == 'gompertz'",
   numericInput("gompertz.shape", label = "Shape", value = .1, step = .1),
   numericInput("gompertz.rate", label = "Rate", value = 1, step = .1)
 )
 
 pars.llogis <- conditionalPanel(
-  condition = "input.survdist.indexOf('llogis') != -1",
+  condition = "input.survdist == 'llogis'",
   numericInput("llogis.shape", label = "Shape", value = 2, step = .1),
   numericInput("llogis.scale", label = "Scale", value = 1, step = .1)
 )
 
 pars.gengamma <- conditionalPanel(
-  condition = "input.survdist.indexOf('gengamma') != -1",
+  condition = "input.survdist == 'gengamma'",
   numericInput("gengamma.mu", label = "Location", value = 0, step = .1),
   numericInput("gengamma.sigma", label = "Scale", value = 1, step = .1),
   numericInput("gengamma.Q", label = "Shape", value = 1, step = .1)
@@ -69,7 +69,8 @@ layout <- fluidRow(sidebar, main1, main2)
 tab.surv <- tabPanel("Survival Curves", layout)
 
 # ABOUT ------------------------------------------------------------------------
+withMathJax(helpText("Some math here $$\\alpha+\\beta$$"))
 tab.about <- tabPanel("About", fluidRow(column(12, includeMarkdown("about.md"))))
 
 # NAV BAR ----------------------------------------------------------------------
-fluidPage(tabsetPanel(tab.surv, tab.about))
+fluidPage(withMathJax(),tabsetPanel(tab.surv, tab.about))
