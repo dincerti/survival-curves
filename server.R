@@ -62,7 +62,7 @@ server <- function(input, output, session) {
   output$haz <- renderPlotly({
     haz <- dat()$haz
     haz <- haz[haz$t <= input$t[2], ]
-    haz$haz <- round(haz$haz, 3)
+    haz$haz <- round(haz$haz, 6)
     x.axis <- list(title = "Time")
     y.axis <- list(title = "Hazard rate")
     p <- plot_ly(data = haz, x = ~t, y = ~haz) %>%
