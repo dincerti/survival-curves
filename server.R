@@ -20,6 +20,28 @@ server <- function(input, output, session) {
                       lnorm = Hlnorm, gamma = Hgamma,
                       gompertz = Hgompertz, llogis = Hllogis,
                       gengamma = Hgengamma) 
+      if (input$survdist == "exp"){
+          req(input$rate)
+      } else if (input$survdist == "wei"){
+          req(input$shape) 
+          req(input$scale)
+      } else if (input$survdist == "lnorm"){
+          req(input$logmean) 
+          req(input$logsd)
+      } else if (input$survdist == "gamma"){
+          req(input$gamma.shape)
+          req(input$gamma.rate)
+      } else if (input$survdist == "gompertz"){
+          req(input$gompertz.shape)
+          req(input$gompertz.rate)
+      } else if (input$survdist == "llogis"){
+          req(input$llogis.shape)
+          req(input$llogis.scale)
+      } else if (input$survdist == "gengamma"){
+          req(input$gengamma.mu)
+          req(input$gengamma.sigma)
+          req(input$gengamma.Q)
+      }
       pars <- switch(input$survdist,
                      exp = input$rate,
                      wei = c(input$shape, input$scale),
