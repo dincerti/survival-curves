@@ -50,7 +50,7 @@ select.survdist <- selectInput("survdist", label = "Survival Distribution",
                                           "Gompertz" = "gompertz",
                                           "Log-logistic" = "llogis",
                                           "Generalized gamma" = "gengamma"), 
-                              selected = "gengamma") 
+                              selected = "exp") 
 slider.time <- sliderInput("t", label = "Survival time",
                            value = c(0, 30), min = 0, max = 100)
 
