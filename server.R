@@ -52,16 +52,16 @@ server <- function(input, output, session) {
                      gengamma = c(input$gengamma.mu, input$gengamma.sigma, 
                                   input$gengamma.Q))
       arglist <- c(list(t), as.list(pars))
-      surv <- data.frame(t = t, surv = do.call(sdist,  arglist))
-      den <- data.frame(t = t, den = do.call(ddist, arglist))
-      haz <- data.frame(t = t, haz = do.call(hdist, arglist))
-      Haz <- data.frame(t = t, Haz = do.call(Hdist, arglist))
+      surv <- data.table(t = t, surv = do.call(sdist,  arglist))
+      den <- data.table(t = t, den = do.call(ddist, arglist))
+      haz <- data.table(t = t, haz = do.call(hdist, arglist))
+      Haz <- data.table(t = t, Haz = do.call(Hdist, arglist))
       return(list(surv = surv, den = den, haz = haz, Haz = Haz))
   })
   
   output$surv <- renderPlotly({
     surv <- dat()$surv
-    surv <- surv[surv$t <= input$t[2], ]
+    surv <- surv[t >= input$t[1] & t <= input$t[2], ]
     x.axis <- list(title = "Time")
     y.axis <- list(title = "Survival probability")
     p <- plot_ly(data = surv, x = ~t, y = ~surv) %>%
@@ -72,7 +72,7 @@ server <- function(input, output, session) {
   
   output$den <- renderPlotly({
     den <- dat()$den
-    den <- den[den$t <= input$t[2], ]
+    den <- den[t >= input$t[1] & t <= input$t[2], ]
     x.axis <- list(title = "Time")
     y.axis <- list(title = "Density")
     p <- plot_ly(data = den, x = ~t, y = ~den) %>%
@@ -83,7 +83,7 @@ server <- function(input, output, session) {
   
   output$haz <- renderPlotly({
     haz <- dat()$haz
-    haz <- haz[haz$t <= input$t[2], ]
+    haz <- haz[t >= input$t[1] & t <= input$t[2], ]
     haz$haz <- round(haz$haz, 6)
     x.axis <- list(title = "Time")
     y.axis <- list(title = "Hazard rate")
@@ -95,7 +95,7 @@ server <- function(input, output, session) {
   
   output$Haz <- renderPlotly({
     Haz <- dat()$Haz
-    Haz <- Haz[Haz$t <= input$t[2], ]
+    Haz <- Haz[t >= input$t[1] & t <= input$t[2], ]
     x.axis <- list(title = "Time")
     y.axis <- list(title = "Cumulative hazard")
     p <- plot_ly(data = Haz, x = ~t, y = ~Haz) %>%
